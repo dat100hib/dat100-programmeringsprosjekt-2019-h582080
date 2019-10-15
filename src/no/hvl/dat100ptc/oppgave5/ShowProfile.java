@@ -6,6 +6,7 @@ import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.oppgave2.GPSData;
 import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
+import no.hvl.dat100ptc.oppgave3.GPSUtils;
 import no.hvl.dat100ptc.oppgave4.GPSComputer;
 
 import javax.swing.JOptionPane;
@@ -24,8 +25,7 @@ public class ShowProfile extends EasyGraphics {
 		String filename = JOptionPane.showInputDialog("GPS data filnavn: ");
 		GPSComputer gpscomputer =  new GPSComputer(filename);
 
-		gpspoints = gpscomputer.getGPSPoints();
-		
+		gpspoints = gpscomputer.getGPSPoints();		
 	}
 
 	public static void main(String[] args) {
@@ -34,7 +34,7 @@ public class ShowProfile extends EasyGraphics {
 
 	public void run() {
 
-		int N = gpspoints.length; // number of data points
+		int N = gpspoints.length; 
 
 		makeWindow("Height profile", 2 * MARGIN + 3 * N, 2 * MARGIN + MAXBARHEIGHT);
 
@@ -44,13 +44,18 @@ public class ShowProfile extends EasyGraphics {
 
 	public void showHeightProfile(int ybase) {
 
-		// ybase indicates the position on the y-axis where the columns should start
-		
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
+	int bredde = 1;
+	int mellomrom = 2;
+	int x = 1+MARGIN;
+	double y = 0;
+	int b = 0;
+	setColor(0,0,255);
 	
-		// TODO - SLUTT
-	}
-
+	for(int i = 0; i < gpspoints.length; i++) {
+		y = gpspoints[i].getElevation();
+		 b = 4*(int)y;
+		fillRectangle(x,(int)(ybase-b),bredde,(int)(b));
+		x += mellomrom;
+	}		
+  }	
 }
